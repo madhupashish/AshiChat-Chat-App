@@ -1,0 +1,9 @@
+<!-- dashboard.ejs -->
+
+<% if (typeof user !== 'undefined' && user !== null) { %>
+    <h1>Hii, <%= user.name %></h1>
+    <a href="/logout">Logout</a>
+<% } else { %>
+    <h1>User not logged in</h1>
+    <!-- You can add appropriate content for users who are not logged in -->
+<% } %>
