@@ -1,28 +1,20 @@
-const { Timestamp } = require('mongodb');
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const chatSchema = new mongoose.Schema({
-
-    // 1- Mongoose.Schema => Mongoose is a Library having a "Schema" functionality.
-    // 2- Types => To retrieve data types of each document correctly.
-    // 3- Objectid => One of the data type defined by schema by default.
-    
-    sender_ID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'currentUsers' // ref: 'Users' => Developing a relationship between both fields.
+const chatSchema = new Schema({
+    senderID: {
+        type: Schema.Types.ObjectId,
+        ref: 'currentUsers', // Establishing a relationship with the 'currentUsers' collection
+        required: true
     },
-    receiver_ID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'currentUsers'
+    receiverID: {
+        type: Schema.Types.ObjectId,
+        ref: 'currentUsers',
+        required: true
     },
     message: {
         type: String,
-        rrequire: true
+        required: true
     },
+}, { timestamps: true });
 
-},
-    { timestamps: true } // This option is used to automatically add two fields to each document in the collection: "createdAt" and "updatedAt".
-);
-
-module.exports = mongoose.model('chats', chatSchema)
-
+module.exports = model('Chat', chatSchema);
