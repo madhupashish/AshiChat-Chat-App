@@ -1,2 +1,2 @@
-# Chit-Chat App
+# A Chat App
 This is a chatting App
