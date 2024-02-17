@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 /* ----- B-Register Page Rendering ----- */
 
-const registerLoad = async (req, res) => {
+const registerPageRender = async (req, res) => {
     try {
         return res.render('register');
     } catch (error) {
@@ -15,7 +15,7 @@ const registerLoad = async (req, res) => {
 
 /* ----- C-Registering a New User ----- */
 
-const register = async (req, res) => {
+const registerUser = async (req, res) => {
     try {
         const passwordHash = await bcrypt.hash(req.body.password, 10);
         const user = new User({
@@ -32,7 +32,7 @@ const register = async (req, res) => {
 }
 
 /* ----- D-Login User ----- */
-const loadLogin = async (req, res) => {
+const loginPageRender = async (req, res) => {
     try {
         return res.render('login');
     } catch (error) {
@@ -40,7 +40,7 @@ const loadLogin = async (req, res) => {
     }
 }
 
-const login = async (req, res) => {
+const loginUser = async (req, res) => {
     try {
         const email = req.body.email;
         const password = req.body.password;
@@ -69,7 +69,7 @@ const login = async (req, res) => {
 };
 
 /* ----- E-Logout User ----- */
-const logout = async (req, res) => {
+const logoutUser = async (req, res) => {
     try {
         req.session.destroy();
         return res.redirect('/');
@@ -79,7 +79,7 @@ const logout = async (req, res) => {
 }
 
 /* ----- F-User Dashboard ----- */
-const loadDashboard = async (req, res) => {
+const dashboardPageRender = async (req, res) => {
     try {
         return res.render('dashboard', { user: req.session.user })
     } catch (error) {
@@ -91,10 +91,10 @@ const loadDashboard = async (req, res) => {
 /* ----- X-Exporting Functions ----- */
 
 module.exports = {
-    registerLoad,
-    register,
-    loadLogin,
-    login,
-    logout,
-    loadDashboard
+    registerPageRender,
+    registerUser,
+    loginPageRender,
+    loginUser,
+    logoutUser,
+    dashboardPageRender
 }
