@@ -1,29 +1,28 @@
-
-const isLogin = async (req, res, next) => {
+const isLogin = (req, res, next) => {
     try {
         if (req.session.user) {
-            res.redirect('/')
+            return res.redirect('/');
         }
-        next()
+        next();
     } catch (error) {
-        console.log(error.message)
+        console.error('Error in isLogin middleware:', error.message);
+        res.status(500).send('Internal Server Error');
     }
-}
+};
 
-const isLogout = async (req, res, next) => {
+const isLogout = (req, res, next) => {
     try {
         if (req.session.user) {
-            res.redirect('/dashboard');
-        } else {
-            next();
+            return res.redirect('/dashboard');
         }
+        next();
     } catch (error) {
-        console.log(error.message);
+        console.error('Error in isLogout middleware:', error.message);
+        res.status(500).send('Internal Server Error');
     }
-}
-
+};
 
 module.exports = {
     isLogin,
     isLogout
-}
+};
