@@ -1,29 +1,28 @@
-const { Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: true
+        required: true
     },
     email: {
         type: String,
-        require: true
+        required: true,
+        unique: true // Assuming email should be unique
     },
     image: {
         type: String,
-        require: true
+        required: true
     },
     password: {
         type: String,
-        require: true
+        required: true
     },
     isOnline: {
-        type: String,
-        default:'0'
-    },
+        type: Boolean,
+        default: false
+    }
 },
-    { timestamps: true }
-);
+{ timestamps: true });
 
-module.exports = mongoose.model('currentusers', userSchema) // case sensitive
+module.exports = mongoose.model('CurrentUsers', userSchema); // case sensitive
